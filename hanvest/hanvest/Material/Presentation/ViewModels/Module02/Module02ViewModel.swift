@@ -10,14 +10,24 @@ import Foundation
 class Module02ViewModel: ObservableObject {
     @Inject var validateIfUserHasCompletedTheModule: ValidateIfUserHasCompletedTheModule
     
-    let progressBarMinValue: Int = 0
-    let progressBarMaxValue: Int = 100
-    let lastPage = Module02HeaderWithDetailText.page10.rawValue
+    let progressBarMinValue: Int
+    let progressBarMaxValue: Int
+    let lastPage: Int
     
-    @Published var currentTab: Int = 0
-    @Published var progressBarCurrValue: Int = 4
-    @Published var pageState: Module02PageState = .pageContinue
-    @Published var userSelectedAnswers = Array(repeating: "", count: Module02HeaderWithDetailText.page10.rawValue)
+    @Published var currentTab: Int
+    @Published var progressBarCurrValue: Int
+    @Published var pageState: Module02PageState
+    @Published var userSelectedAnswers: Array<String>
+    
+    init() {
+        self.progressBarMinValue = 0
+        self.progressBarMaxValue = 100
+        self.lastPage = Module02HeaderWithDetailText.page10.rawValue
+        self.currentTab = 0
+        self.progressBarCurrValue = 4
+        self.pageState = .pageContinue
+        self.userSelectedAnswers = Array(repeating: "", count: Module02HeaderWithDetailText.page10.rawValue)
+    }
     
     
     func directToCompletionPage(router: any AppRouterProtocol, specificModule: CompletionEntityType) {

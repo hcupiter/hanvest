@@ -27,7 +27,13 @@ struct HanvestHeaderView: View {
                                 userDataViewModel.userData?.userBalance ?? -100
                             )
                         )
-                            .font(.nunito(.title2))
+                        .font(.nunito(.title2))
+                        .showCase(
+                            order: MainViewTipData.virtualBalance.index,
+                            title: MainViewTipData.virtualBalance.title,
+                            detail: MainViewTipData.virtualBalance.detail,
+                            stage: HanvestMainViewHighlightStage.mainStage.stringValue
+                        )
                     }
                 }
                 

@@ -9,24 +9,29 @@ enum Module05ContentView: Equatable, Hashable, Identifiable {
     case buyStage(
         appRouter: any AppRouterProtocol,
         profileViewModel: Module05ProfileViewModel,
-        simulationViewModel: Module05SimulationViewModel
+        simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel
     )
     case sellStage(
         appRouter: any AppRouterProtocol,
         profileViewModel: Module05ProfileViewModel,
-        simulationViewModel: Module05SimulationViewModel
+        simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel
     )
     case confirmBuy(
         profileViewModel: Module05ProfileViewModel,
-        simulationViewModel: Module05SimulationViewModel
+        simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel
     )
     case confirmSell(
         profileViewModel: Module05ProfileViewModel,
-        simulationViewModel: Module05SimulationViewModel
+        simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel
     )
     case transactionComplete(
         profileViewModel: Module05ProfileViewModel,
         simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel,
         transactionViewModel: TransactionStatusViewModel
     )
     

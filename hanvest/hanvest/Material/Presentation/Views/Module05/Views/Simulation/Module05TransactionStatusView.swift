@@ -12,6 +12,7 @@ struct Module05TransactionStatusView: View {
     
     @ObservedObject var profileViewModel: Module05ProfileViewModel
     @ObservedObject var simulationViewModel: Module05SimulationViewModel
+    @ObservedObject var highlightViewModel: HighlightViewModel
     
     let transaction: TransactionStatusViewModel
     
@@ -36,6 +37,7 @@ struct Module05TransactionStatusView: View {
                             moduleRouter: moduleRouter,
                             profileViewModel: profileViewModel,
                             simulationViewModel: simulationViewModel,
+                            highlightViewModel: highlightViewModel,
                             transaction: transaction
                         )
                     }

@@ -13,6 +13,7 @@ struct Module05SimulationView: View {
     
     @ObservedObject var profileViewModel: Module05ProfileViewModel
     @ObservedObject var simulationViewModel: Module05SimulationViewModel
+    @ObservedObject var highlightViewModel: HighlightViewModel
     
     var body: some View {
         ZStack {
@@ -83,8 +84,8 @@ struct Module05SimulationView: View {
                             .padding(.horizontal, 20)
                         }
                         .padding(.top, 12)
-                        .onChange(of: simulationViewModel.currentHighlight) { _, newValue in
-                            if simulationViewModel.checkForCurrentHighlightValue(newValue) {
+                        .onChange(of: highlightViewModel.currentHighlight) { _, newValue in
+                            if simulationViewModel.checkForCurrentHighlightedValue(newValue) {
                                 withAnimation {
                                     scrollView.scrollTo(newValue, anchor: .top)
                                 }
@@ -108,11 +109,12 @@ struct Module05SimulationView: View {
                                     moduleRouter.push(
                                         .confirmSell(
                                             profileViewModel: profileViewModel,
-                                            simulationViewModel: simulationViewModel
+                                            simulationViewModel: simulationViewModel,
+                                            highlightViewModel: highlightViewModel
                                         )
                                     )
                                     
-                                    simulationViewModel.currentHighlightStage = .sellStage
+                                    highlightViewModel.stage = Module05HighlightStage.sellStage.stringValue
                                 }
                                 .showCase(
                                     order: Module05TipData.sellButton.index,
@@ -129,11 +131,12 @@ struct Module05SimulationView: View {
                                     moduleRouter.push(
                                         .confirmBuy(
                                             profileViewModel: profileViewModel,
-                                            simulationViewModel: simulationViewModel
+                                            simulationViewModel: simulationViewModel,
+                                            highlightViewModel: highlightViewModel
                                         )
                                     )
                                     
-                                    simulationViewModel.currentHighlightStage = .buyStage
+                                    highlightViewModel.stage = Module05HighlightStage.buyStage.stringValue
                                 }
                                 .showCase(
                                     order: Module05TipData.buyButton.index,

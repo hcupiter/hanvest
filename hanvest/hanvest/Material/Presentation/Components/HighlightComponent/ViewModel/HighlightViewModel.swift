@@ -15,7 +15,8 @@ class HighlightViewModel: ObservableObject {
     @Published var currentHighlight: Int
     /// popover
     @Published var showTitle: Bool
-    @Published var positionUpOrDown: Bool
+    @Published var isItemInUpperScreenPart: Bool
+    @Published var isItemCoverThreeQuarterScreen: Bool
     
     init() {
         self.stage = ""
@@ -23,7 +24,8 @@ class HighlightViewModel: ObservableObject {
         self.showView = true
         self.currentHighlight = 0
         self.showTitle = true
-        self.positionUpOrDown = true
+        self.isItemInUpperScreenPart = true
+        self.isItemCoverThreeQuarterScreen = true
     }
     
     func resetCurrectHighlightValue() {
@@ -36,8 +38,9 @@ class HighlightViewModel: ObservableObject {
         showTitle = true
     }
     
-    func setNewPopUpPosition(midYPosition: CGFloat, screenHeight: CGFloat) {
-        positionUpOrDown = midYPosition < screenHeight / 2
+    func setNewPopUpPosition(highlightRect: CGRect, screenHeight: CGFloat) {
+        isItemInUpperScreenPart = highlightRect.midY < screenHeight / 2
+        isItemCoverThreeQuarterScreen = highlightRect.height > (screenHeight * 18 / 25)
     }
     
     func updateCurrentHighlight() {
@@ -56,4 +59,21 @@ class HighlightViewModel: ObservableObject {
             }
         }
     }
+    
+    func getPopoverAttachmentAnchorPosition() -> PopoverAttachmentAnchor {
+        if isItemCoverThreeQuarterScreen || isItemInUpperScreenPart {
+            return .point(.bottom)
+        } else {
+            return .point(.top)
+        }
+    }
+
+    func getPopoverArrowEdge() -> Edge {
+        if isItemCoverThreeQuarterScreen || !isItemInUpperScreenPart {
+            return .bottom
+        } else {
+            return .top
+        }
+    }
+    
 }

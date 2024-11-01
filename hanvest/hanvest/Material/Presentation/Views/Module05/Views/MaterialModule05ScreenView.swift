@@ -42,7 +42,8 @@ struct MaterialModule05ScreenView: View {
                         .buyStage(
                             appRouter: appRouter,
                             profileViewModel: profileViewModel,
-                            simulationViewModel: simulationViewModel
+                            simulationViewModel: simulationViewModel,
+                            highlightViewModel: highlightViewModel
                         )
                     )
                 }
@@ -59,7 +60,7 @@ struct MaterialModule05ScreenView: View {
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
-            highlightViewModel.stage = simulationViewModel.currentHighlightStage.stringValue
+            highlightViewModel.stage = Module05HighlightStage.mainStage.stringValue
             
             if simulationViewModel.currentStage == nil {
                 simulationViewModel.currentStage = .buyStage(appRouter: appRouter)
@@ -75,12 +76,7 @@ struct MaterialModule05ScreenView: View {
                 .animation(.easeInOut(duration: 0.3), value: contentRouter.overlay)
             }
         }
-        .onChange(of: simulationViewModel.currentHighlightStage) { _, newValue in
-            highlightViewModel.stage = newValue.stringValue
-        }
-        .modifier(HighlightHelperView(viewModel: highlightViewModel, onValueChange: { value in
-            simulationViewModel.currentHighlight = value
-        }))
+        .modifier(HighlightHelperView(viewModel: highlightViewModel))
     }
 }
 

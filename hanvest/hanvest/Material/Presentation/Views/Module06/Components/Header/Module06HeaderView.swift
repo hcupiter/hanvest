@@ -48,6 +48,12 @@ struct Module06HeaderView: View {
                         .onTapGesture {
                             bellIconTappedAction()
                         }
+                        .showCase(
+                            order: Module06TipData.notification.index,
+                            title: Module06TipData.notification.title,
+                            detail: Module06TipData.notification.detail,
+                            stage: Module06HighlightStage.mainStage.stringValue
+                        )
                     Image(systemName: "person")
                         .resizable()
                         .scaledToFill()

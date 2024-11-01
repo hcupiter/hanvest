@@ -46,7 +46,7 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
     @ViewBuilder
     func build(_ content: Module05ContentView) -> some View {
         switch content {
-        case .buyStage(let appRouter, let profileViewModel, let simulationViewModel):
+        case .buyStage(let appRouter, let profileViewModel, let simulationViewModel, let highlightViewModel):
             ZStack {
                 Color.background.ignoresSafeArea()
                 VStack {
@@ -66,14 +66,15 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
                         appRouter: appRouter,
                         moduleRouter: self,
                         profileViewModel: profileViewModel,
-                        simulationViewModel: simulationViewModel
+                        simulationViewModel: simulationViewModel,
+                        highlightViewModel: highlightViewModel
                     )
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
             }
             .navigationBarBackButtonHidden()
             
-        case .sellStage(let appRouter, let profileViewModel, let simulationViewModel):
+        case .sellStage(let appRouter, let profileViewModel, let simulationViewModel, let highlightViewModel):
             ZStack {
                 Color.background.ignoresSafeArea()
                 VStack {
@@ -93,7 +94,8 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
                         appRouter: appRouter,
                         moduleRouter: self,
                         profileViewModel: profileViewModel,
-                        simulationViewModel: simulationViewModel
+                        simulationViewModel: simulationViewModel,
+                        highlightViewModel: highlightViewModel
                     )
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
@@ -103,28 +105,32 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
             
         case .confirmBuy(
             let profileViewModel,
-            let simulationViewModel
+            let simulationViewModel,
+            let highlightViewModel
         ):
             ZStack {
                 Color.background.ignoresSafeArea()
                 Module05ConfirmationBuyView(
                     moduleRouter: self,
                     profileViewModel: profileViewModel,
-                    simulationViewModel: simulationViewModel
+                    simulationViewModel: simulationViewModel,
+                    highlightViewModel: highlightViewModel
                 )
             }
             .navigationBarBackButtonHidden()
             
         case .confirmSell(
             let profileViewModel,
-            let simulationViewModel
+            let simulationViewModel,
+            let highlightViewModel
         ):
             ZStack {
                 Color.background.ignoresSafeArea()
                 Module05ConfirmationSellView(
                     moduleRouter: self,
                     profileViewModel: profileViewModel,
-                    simulationViewModel: simulationViewModel
+                    simulationViewModel: simulationViewModel,
+                    highlightViewModel: highlightViewModel
                 )
             }
             .navigationBarBackButtonHidden()
@@ -132,6 +138,7 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
         case .transactionComplete(
             let profileViewModel,
             let simulationViewModel,
+            let highlightViewModel,
             let transactionViewModel
         ):
             ZStack {
@@ -141,6 +148,7 @@ class Module05Router: Module05RouterProtocol, ObservableObject {
                         moduleRouter: self,
                         profileViewModel: profileViewModel,
                         simulationViewModel: simulationViewModel,
+                        highlightViewModel: highlightViewModel,
                         transaction: transactionViewModel
                     )
                 }

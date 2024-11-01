@@ -10,13 +10,22 @@ import Foundation
 class Module01ViewModel: ObservableObject {
     @Inject var validateIfUserHasCompletedTheModule: ValidateIfUserHasCompletedTheModule
     
-    let progressBarMinValue: Int = 0
-    let progressBarMaxValue: Int = 100
-    let lastPage = ContentOfModule01Material.allCases.count
+    let progressBarMinValue: Int
+    let progressBarMaxValue: Int
+    let lastPage: Int
     
-    @Published var currentTab: Int = 0
-    @Published var progressBarCurrValue: Int = 4
-    @Published var plantingViewVisibility: PlantingViewVisibility = .isVisible
+    @Published var currentTab: Int
+    @Published var progressBarCurrValue: Int
+    @Published var plantingViewVisibility: PlantingViewVisibility
+    
+    init() {
+        self.progressBarMinValue = 0
+        self.progressBarMaxValue = 100
+        self.lastPage = ContentOfModule01Material.allCases.count
+        self.currentTab = 0
+        self.progressBarCurrValue = 4
+        self.plantingViewVisibility = .isVisible
+    }
     
     
     func directToCompletionPage(router: any AppRouterProtocol, specificModule: CompletionEntityType) {

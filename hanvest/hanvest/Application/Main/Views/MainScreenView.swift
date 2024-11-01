@@ -13,6 +13,7 @@ struct MainScreenView: View {
     @State private var selectionTab: HanvestMainViewTabSelection = .material
     @StateObject var simulationViewModel = LocalSimulationViewModel()
     @StateObject var userDataViewModel: HanvestLoadedUserDataViewModel = .init()
+    @StateObject private var highlightViewModel = HighlightViewModel()
     
     var body: some View {
         VStack {
@@ -70,12 +71,15 @@ struct MainScreenView: View {
             .transition(.slide)
             .animation(.easeInOut, value: selectionTab)
         }
-        .onAppear(){
+        .onAppear {
+            highlightViewModel.stage = HanvestMainViewHighlightStage.mainStage.stringValue
+            
             if simulationViewModel.stockList.isEmpty {
                 simulationViewModel.setup(appRouter: router)
             }
             userDataViewModel.setup()
         }
+        .modifier(HighlightHelperView(viewModel: highlightViewModel))
     }
 }
 

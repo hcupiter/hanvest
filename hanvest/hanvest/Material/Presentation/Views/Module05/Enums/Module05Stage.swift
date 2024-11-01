@@ -15,6 +15,7 @@ enum Module05Stage: Equatable {
         moduleRouter: any Module05RouterProtocol,
         profileViewModel: Module05ProfileViewModel,
         simulationViewModel: Module05SimulationViewModel,
+        highlightViewModel: HighlightViewModel,
         transaction: TransactionStatusViewModel
     ) {
         switch self {
@@ -25,7 +26,8 @@ enum Module05Stage: Equatable {
                 .sellStage(
                     appRouter: appRouter,
                     profileViewModel: profileViewModel,
-                    simulationViewModel: simulationViewModel
+                    simulationViewModel: simulationViewModel,
+                    highlightViewModel: highlightViewModel
                 )
             )
             simulationViewModel.currentStage = .sellStage(appRouter: appRouter)

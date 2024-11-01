@@ -12,6 +12,7 @@ struct Module05ConfirmationBuyView: View {
     
     @ObservedObject var profileViewModel: Module05ProfileViewModel
     @ObservedObject var simulationViewModel: Module05SimulationViewModel
+    @ObservedObject var highlightViewModel: HighlightViewModel
     
     @StateObject var viewmodel = BuyingStockDataViewModel()
     
@@ -56,6 +57,7 @@ struct Module05ConfirmationBuyView: View {
                                         .transactionComplete(
                                             profileViewModel: profileViewModel,
                                             simulationViewModel: simulationViewModel,
+                                            highlightViewModel: highlightViewModel,
                                             transactionViewModel: TransactionStatusViewModel(
                                                 lotAmount: viewmodel.stockBuyLot,
                                                 stockPrice: viewmodel.toBuyStockPrice,

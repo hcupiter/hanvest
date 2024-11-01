@@ -15,6 +15,13 @@ struct HanvestMaterialScreenView: View {
     var body: some View {
         VStack {
             ModuleJourneyView(router: router, viewModel: viewmodel)
+                .showCase(
+                    order: MainViewTipData.moduleIntro.index,
+                    title: MainViewTipData.moduleIntro.title,
+                    detail: MainViewTipData.moduleIntro.detail,
+                    stage: HanvestMainViewHighlightStage.mainStage.stringValue
+                )
+            
             Divider()
         }
     }

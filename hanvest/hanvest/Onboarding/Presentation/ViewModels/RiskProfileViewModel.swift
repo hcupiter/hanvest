@@ -10,14 +10,24 @@ import Foundation
 class RiskProfileViewModel: ObservableObject {
     @Inject var calculateUserRiskProfile: CalculateUserRiskProfile
     
-    let progressBarMinValue: Int = 0
-    let progressBarMaxValue: Int = 100
+    let progressBarMinValue: Int
+    let progressBarMaxValue: Int
     
-    @Published var resultState: RiskProfileType = .conservative ///will be used for segmenting user based on risk profile
-    @Published var pageState: RiskProfilePageState = .pageOpening
-    @Published var currentTab: Int = 0
-    @Published var progressBarCurrValue: Int = 4
-    @Published var userSelectedAnswers = Array(repeating: "", count: RiskProfileQuestionsAndOptions.allCases.count)
+    @Published var currentTab: Int
+    @Published var progressBarCurrValue: Int
+    @Published var resultState: RiskProfileType ///will be used for segmenting user based on risk profile
+    @Published var pageState: RiskProfilePageState
+    @Published var userSelectedAnswers: Array<String>
+    
+    init() {
+        self.progressBarMinValue = 0
+        self.progressBarMaxValue = 100
+        self.currentTab = 0
+        self.progressBarCurrValue = 4
+        self.resultState = .conservative
+        self.pageState = .pageOpening
+        self.userSelectedAnswers = Array(repeating: "", count: RiskProfileQuestionsAndOptions.allCases.count)
+    }
     
     
     func getUserRiskProfile() {

@@ -18,6 +18,7 @@ struct MaterialModule06ScreenView: View {
     @StateObject private var simulationViewModel = Module06SimulationViewModel()
     @StateObject private var profileViewModel = Module06ProfileViewModel()
     @StateObject private var newsViewModel = Module06NewsViewModel()
+    @StateObject private var highlightViewModel = HighlightViewModel()
     
     var body: some View {
         VStack {
@@ -36,7 +37,7 @@ struct MaterialModule06ScreenView: View {
                     contentRouter.build(content)
                 }
             }
-            .onAppear(){
+            .onAppear {
                 if contentRouter.content.count <= 0 {
                     contentRouter.content.append(
                         .simulation(
@@ -62,6 +63,9 @@ struct MaterialModule06ScreenView: View {
             }
             
         }
+        .onAppear {
+            highlightViewModel.stage = Module06HighlightStage.mainStage.stringValue
+        }
         .frame(maxHeight: .infinity, alignment: .top)
         .overlay {
             if let popup = contentRouter.overlay {
@@ -73,7 +77,7 @@ struct MaterialModule06ScreenView: View {
                 .animation(.easeInOut(duration: 0.3), value: contentRouter.overlay)
             }
         }
-
+        .modifier(HighlightHelperView(viewModel: highlightViewModel))
     }
 }
 
